@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rice Customer Survey Form</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      background: linear-gradient(135deg, #007bff 30%, #6610f2 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 15px;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .form-container {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 25px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      animation: slideIn 1s ease-in-out;
+      max-width: 450px;
+      width: 100%;
+      position: relative;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    label {
+      font-weight: 600;
+      margin-bottom: 5px;
+      color: #333;
+      font-size: 0.95rem;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .input-group-text {
+      background: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 10px 0 0 10px;
+    }
+
+    .form-control {
+      border-radius: 0 10px 10px 0;
+    }
+
+    .form-control:focus {
+      box-shadow: 0 0 10px rgba(0, 123, 255, 0.8);
+      border-color: #007bff;
+      animation: pulse 0.5s;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+      100% { transform: scale(1); }
+    }
+
+    .btn-custom {
+      border-radius: 12px;
+      font-weight: 600;
+      padding: 12px;
+      transition: all 0.3s ease;
+    }
+
+    .btn-custom:hover {
+      transform: scale(1.05);
+      box-shadow: 0 5px 20px rgba(0, 123, 255, 0.5);
+    }
+
+    #locationStatus {
+      font-size: 0.9em;
+      margin-top: 5px;
+      color: #555;
+    }
+
+    /* Preloader styles */
+    .preloader {
+      display: none;
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      border-radius: 20px;
+    }
+
+    .loader {
+      width: 50px;
+      height: 50px;
+      border: 5px solid rgba(255, 255, 255, 0.3);
+      border-top: 5px solid #007bff;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    #thankYouMessage {
+      display: none;
+      text-align: center;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    #thankYouMessage h3 {
+      color: #28a745;
+      font-weight: 700;
+    }
+
+    #thankYouMessage .smile {
+      font-size: 40px;
+      animation: bounce 1.5s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="form-container">
+      <!-- Preloader -->
+      <div class="preloader" id="preloader">
+        <div class="loader"></div>
+      </div>
+
+      <h2 class="text-center mb-4 text-primary">Customer Survey Form</h2>
+
+      <form id="surveyForm">
+        <!-- Name -->
+        <div class="mb-3">
+          <label for="customerName">Customer Name</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="fa fa-user"></i></span>
+            <input type="text" class="form-control" id="customerName" required placeholder="Enter your name">
+          </div>
+        </div>
+
+        <!-- Phone -->
+        <div class="mb-3">
+          <label for="phoneNumber"> Phone Number</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="fa fa-phone"></i></span>
+            <input type="tel" class="form-control" id="phoneNumber" required placeholder="Enter phone number">
+          </div>
+        </div>
+
+        <!-- GPS -->
+        <div class="mb-3">
+          <label></i> GPS Location</label>
+          <button type="button" class="btn btn-secondary w-100 btn-custom" id="getLocation">
+            <i class="fa fa-location-crosshairs"></i> Capture GPS Location
+          </button>
+          <div id="locationStatus">Click the button to capture location</div>
+          <input type="hidden" id="locationLink" required>
+        </div>
+
+        <!-- Comments -->
+        <div class="mb-3">
+          <label for="comments"><i class="fa fa-comment"></i> Comments</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="fa fa-comment"></i></span>
+            <textarea class="form-control" id="comments" rows="3" required placeholder="Your feedback on rice usage"></textarea>
+          </div>
+        </div>
+
+        <!-- Submit -->
+        <button type="submit" class="btn btn-primary w-100 btn-custom">
+          <i class="fa fa-paper-plane"></i> Submit
+        </button>
+      </form>
+
+      <!-- Thank You Message -->
+      <div id="thankYouMessage" class="mt-4">
+        <div class="smile">😊</div>
+        <h3 id="personalizedThankYou">Thank You!</h3>
+        <p>Your survey has been submitted successfully.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Custom Modal -->
+  <div class="modal fade" id="agreeModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header bg-primary text-white">
+          <h5 class="modal-title"><i class="fa fa-info-circle"></i> Agreement</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body text-center">
+          <p>This survey collects information about your rice usage preferences to help us understand customer needs and improve our offerings. The data will only be used for survey and analysis purposes. Do you agree to continue?</p>
+        </div>
+        <div class="modal-footer d-flex justify-content-center">
+          <button type="button" class="btn btn-danger" id="denyBtn"><i class="fa fa-times"></i> Deny</button>
+          <button type="button" class="btn btn-success" id="acceptBtn"><i class="fa fa-check"></i> Accept</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" async></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('surveyForm');
+      const thankYouMessage = document.getElementById('thankYouMessage');
+      const personalizedThankYou = document.getElementById('personalizedThankYou');
+      const getLocationBtn = document.getElementById('getLocation');
+      const locationStatus = document.getElementById('locationStatus');
+      const locationLinkInput = document.getElementById('locationLink');
+      const preloader = document.getElementById('preloader');
+
+      let pendingData = null; 
+      const modal = new bootstrap.Modal(document.getElementById('agreeModal'));
+
+      // GPS Capture
+      getLocationBtn.addEventListener('click', () => {
+        if (navigator.geolocation) {
+          preloader.style.display = 'flex';
+          locationStatus.textContent = 'Capturing GPS location...';
+          navigator.geolocation.getCurrentPosition(
+            (pos) => {
+              const lat = pos.coords.latitude;
+              const lon = pos.coords.longitude;
+              const url = `https://www.google.com/maps?q=${lat},${lon}`;
+              locationLinkInput.value = url;
+              locationStatus.innerHTML = `<i class="fa fa-check text-success"></i> Location captured`;
+              getLocationBtn.classList.replace('btn-secondary', 'btn-success');
+              getLocationBtn.innerHTML = `<i class="fa fa-map-marker-alt"></i> Location Captured`;
+              preloader.style.display = 'none';
+            },
+            (err) => {
+              locationStatus.textContent = 'Error: ' + err.message;
+              getLocationBtn.classList.add('btn-danger');
+              preloader.style.display = 'none';
+            },
+            { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
+          );
+        } else {
+          locationStatus.textContent = 'Geolocation not supported!';
+        }
+      });
+
+      // Form Submission
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        if (!form.checkValidity() || !locationLinkInput.value) {
+          form.reportValidity();
+          if (!locationLinkInput.value) locationStatus.textContent = 'Please capture GPS location.';
+          return;
+        }
+
+        pendingData = {
+          timestamp: new Date().toISOString(),
+          customerName: document.getElementById('customerName').value,
+          phoneNumber: document.getElementById('phoneNumber').value,
+          locationLink: locationLinkInput.value,
+          comments: document.getElementById('comments').value
+        };
+
+        modal.show();
+      });
+
+      document.getElementById('denyBtn').addEventListener('click', () => {
+        modal.hide();
+        pendingData = null;
+      });
+
+      document.getElementById('acceptBtn').addEventListener('click', async () => {
+        modal.hide();
+        if (!pendingData) return;
+
+        preloader.style.display = 'flex';
+        try {
+          await fetch('https://script.google.com/macros/s/AKfycbx2wjv5bNBy-bROGKZKofm5w9eCvWc1rmUWsq3-3CDALFc0ZWuemfSfkJChlFMyN5ujTQ/exec', {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(pendingData)
+          });
+
+          preloader.style.display = 'none';
+          form.style.display = 'none';
+          personalizedThankYou.textContent = `Thank You, ${pendingData.customerName}!`;
+          thankYouMessage.style.display = 'block';
+        } catch (err) {
+          preloader.style.display = 'none';
+          alert('Error submitting form: ' + err.message);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
