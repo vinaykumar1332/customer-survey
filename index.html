@@ -3,39 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rice Customer Survey Form</title>
+  <title>Rice Customer Survey Form | Feedback & Trust</title>
 
-  <!-- Primary Meta Tags -->
-<title>Rice Customer Survey Form | Feedback & Trust</title>
-<meta name="description" content="Participate in our rice customer survey to share your feedback. Data is collected securely and used only for improving our services.">
-<meta name="keywords" content="rice survey, customer feedback, food quality survey, secure survey form, customer satisfaction survey">
-
-<!-- Robots / SEO -->
-<meta name="robots" content="index, follow">
-<meta name="googlebot" content="index, follow">
-
-<!-- Language & Encoding -->
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="language" content="en">
-
-<!-- Trust & Policy -->
-<meta name="author" content="Your Company Name">
-<meta name="copyright" content="© 2025 Your Company Name">
-<meta name="distribution" content="global">
-<meta name="rating" content="general">
-<meta name="audience" content="all">
-<meta name="doc-type" content="Public">
-<meta name="doc-rights" content="Copywritten work">
-<meta name="doc-publisher" content="Your Company Name">
-
-<!-- Data Privacy / Trust Signals -->
-<meta name="privacy-policy" content="https://customer-survey-mauve.vercel.app/?">
-<meta name="terms-of-service" content="https://customer-survey-mauve.vercel.app/?">
-<meta name="secure" content="true">
+  <!-- Meta for SEO & Sharing -->
+  <meta name="description" content="Participate in our rice customer survey to share your feedback. Data is collected securely and used only for improving our services.">
+  <meta name="keywords" content="rice survey, customer feedback, food quality survey, secure survey form, customer satisfaction survey">
+  <meta name="robots" content="index, follow">
+  <meta name="googlebot" content="index, follow">
+  <meta name="author" content="Your Company Name">
 
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Icons -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
   <style>
@@ -48,152 +26,37 @@
       padding: 15px;
       font-family: 'Poppins', sans-serif;
     }
-
     .form-container {
       background: rgba(255, 255, 255, 0.95);
       padding: 25px;
       border-radius: 20px;
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-      animation: slideIn 1s ease-in-out;
       max-width: 450px;
       width: 100%;
       position: relative;
     }
-
-    @keyframes slideIn {
-      from { opacity: 0; transform: translateY(40px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    label {
-      font-weight: 600;
-      margin-bottom: 5px;
-      color: #333;
-      font-size: 0.95rem;
-    }
-
-    .input-group-text {
-      background: #007bff;
-      color: #fff;
-      border: none;
-      border-radius: 10px 0 0 10px;
-    }
-
-    .form-control {
-      border-radius: 0 10px 10px 0;
-      font-size: 1rem;
-      padding: 12px;
-    }
-
-    .form-control:focus {
-      box-shadow: 0 0 10px rgba(0, 123, 255, 0.8);
-      border-color: #007bff;
-      animation: pulse 0.5s;
-    }
-
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.02); }
-      100% { transform: scale(1); }
-    }
-
-    .btn-custom {
-      border-radius: 12px;
-      font-weight: 600;
-      padding: 12px;
-      transition: all 0.3s ease;
-    }
-
-    .btn-custom:hover {
-      transform: scale(1.05);
-      box-shadow: 0 5px 20px rgba(0, 123, 255, 0.5);
-    }
-
-    #locationStatus {
-      font-size: 0.9em;
-      margin-top: 5px;
-      color: #555;
-    }
-
-    /* Preloader */
+    .btn-custom { border-radius: 12px; font-weight: 600; padding: 12px; }
+    .btn-custom:hover { transform: scale(1.05); box-shadow: 0 5px 20px rgba(0,123,255,0.5); }
+    #locationStatus { font-size: 0.9em; margin-top: 5px; color: #555; }
     .preloader {
-      display: none;
-      position: absolute;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.7);
-      align-items: center;
-      justify-content: center;
-      z-index: 1000;
-      border-radius: 20px;
+      display: none; position: absolute; inset: 0;
+      background: rgba(0, 0, 0, 0.7); align-items: center; justify-content: center;
+      z-index: 1000; border-radius: 20px;
     }
-
-    .loader {
-      width: 50px;
-      height: 50px;
-      border: 5px solid rgba(255, 255, 255, 0.3);
-      border-top: 5px solid #007bff;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-    }
-
-    @keyframes spin { 
-      0% { transform: rotate(0deg); } 
-      100% { transform: rotate(360deg); } 
-    }
-
-    #thankYouMessage {
-      display: none;
-      text-align: center;
-      animation: fadeIn 1s ease-in-out;
-    }
-
-    #thankYouMessage h3 {
-      color: #28a745;
-      font-weight: 700;
-    }
-    #getLocation{
-     width: 80%;
-    }
-
-    #thankYouMessage .smile {
-      font-size: 40px;
-      animation: bounce 1.5s infinite;
-    }
-
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-    }
-
-    /* Mobile optimization */
-    @media (max-width: 576px) {
-      .form-container {
-        padding: 20px;
-        border-radius: 15px;
-      }
-      .form-control {
-        font-size: 0.95rem;
-      }
-    }
-
-    .btn-custom-group-gps{
-        display: flex;
-        justify-content: center;
-        margin-bottom: 10px;
-        button {
-          width: 60%;
-          max-width: 300px;
-        }
-    }
+    .loader { width: 50px; height: 50px; border: 5px solid rgba(255,255,255,0.3);
+      border-top: 5px solid #007bff; border-radius: 50%; animation: spin 1s linear infinite; }
+    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    #thankYouMessage { display: none; text-align: center; }
+    #thankYouMessage h3 { color: #28a745; font-weight: 700; }
+    #thankYouMessage .btn-refresh { margin-top: 15px; }
+    textarea#comments { min-height: 120px; resize: vertical; }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="form-container">
       <!-- Preloader -->
-      <div class="preloader" id="preloader">
-        <div class="loader"></div>
-      </div>
+      <div class="preloader" id="preloader"><div class="loader"></div></div>
 
       <h2 class="text-center mb-4 text-primary">Customer Survey Form</h2>
 
@@ -201,46 +64,31 @@
         <!-- Name -->
         <div class="mb-3">
           <label for="customerName">Customer Name</label>
-          <div class="input-group">
-            <span class="input-group-text"><i class="fa fa-user"></i></span>
-            <input type="text" class="form-control" id="customerName" 
-                   required minlength="4" placeholder="Enter your name">
-          </div>
+          <input type="text" class="form-control" id="customerName" required minlength="4" placeholder="Enter your name">
           <small class="text-danger d-none" id="nameError">Name must be at least 4 characters.</small>
         </div>
 
         <!-- Phone -->
         <div class="mb-3">
           <label for="phoneNumber">Phone Number</label>
-          <div class="input-group">
-            <span class="input-group-text"><i class="fa fa-phone"></i></span>
-            <input type="text" class="form-control" id="phoneNumber" 
-                   required maxlength="10" inputmode="numeric" pattern="^[0-9]{10}$"
-                   placeholder="Enter 10-digit phone number">
-          </div>
+          <input type="text" class="form-control" id="phoneNumber" required maxlength="10" inputmode="numeric" placeholder="Enter 10-digit phone number">
           <small class="text-danger d-none" id="phoneError">Please enter a valid 10-digit number.</small>
         </div>
 
         <!-- GPS -->
         <div class="mb-3">
           <label>GPS Location</label>
-          <div class="btn-custom-group-gps mb-2">
-   <button type="button" class="btn btn-secondary w-100 btn-custom" id="getLocation">
+          <button type="button" class="btn btn-secondary w-100 btn-custom" id="getLocation">
             <i class="fa fa-location-crosshairs"></i> Capture GPS Location
           </button>
-          </div>
-
           <div id="locationStatus">Click the button to capture location</div>
           <input type="hidden" id="locationLink" required>
         </div>
 
         <!-- Comments -->
         <div class="mb-3">
-          <label for="comments"> Comments</label>
-          <div class="input-group">
-            <span class="input-group-text"><i class="fa fa-comment"></i></span>
-            <textarea class="form-control" id="comments" rows="3" required placeholder="Your feedback on rice usage"></textarea>
-          </div>
+          <label for="comments">Comments</label>
+          <textarea class="form-control" id="comments" rows="4" required placeholder="Your feedback on rice usage"></textarea>
           <small class="text-danger d-none" id="commentsError">Please provide your feedback.</small>
         </div>
 
@@ -255,31 +103,39 @@
         <div class="smile">😊</div>
         <h3 id="personalizedThankYou">Thank You!</h3>
         <p>Your survey has been submitted successfully.</p>
+        <button class="btn btn-success btn-refresh" onclick="window.location.reload();">
+          <i class="fa fa-rotate-right"></i> Fill Again
+        </button>
       </div>
     </div>
   </div>
 
-  <!-- Modal -->
-  <div class="modal fade" id="agreeModal" tabindex="-1">
+  <!-- Agreement Modal -->
+  <div class="modal fade" id="agreementModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header bg-primary text-white">
-          <h5 class="modal-title"><i class="fa fa-info-circle"></i> Agreement</h5>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      <div class="modal-content rounded-4">
+        <div class="modal-header">
+          <h5 class="modal-title text-primary"><i class="fa fa-file-contract"></i> User Agreement</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
-        <div class="modal-body text-center">
-          <p>The data will only be used for survey and analysis purposes. Do you agree to continue?</p>
+        <div class="modal-body">
+          <p>By submitting this form, you agree that your data (name, phone, location & feedback) will be collected securely and used only for improving our services.</p>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="agreeCheck">
+            <label class="form-check-label" for="agreeCheck"> I agree to the terms & privacy policy.</label>
+          </div>
+          <small class="text-danger d-none" id="agreeError">You must agree before submitting.</small>
         </div>
-        <div class="modal-footer d-flex justify-content-center">
-          <button type="button" class="btn btn-danger" id="denyBtn"><i class="fa fa-times"></i> Deny</button>
-          <button type="button" class="btn btn-success" id="acceptBtn"><i class="fa fa-check"></i> Accept</button>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button class="btn btn-primary" id="confirmSubmit"><i class="fa fa-check"></i> Confirm & Submit</button>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" async></script>
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const form = document.getElementById('surveyForm');
@@ -295,97 +151,65 @@
       const preloader = document.getElementById('preloader');
       const thankYouMessage = document.getElementById('thankYouMessage');
       const personalizedThankYou = document.getElementById('personalizedThankYou');
-      const modal = new bootstrap.Modal(document.getElementById('agreeModal'));
+      const agreementModal = new bootstrap.Modal(document.getElementById('agreementModal'));
+      const confirmSubmitBtn = document.getElementById('confirmSubmit');
+      const agreeCheck = document.getElementById('agreeCheck');
+      const agreeError = document.getElementById('agreeError');
       let pendingData = null;
 
-      // Force phone input to digits only
+      // Force phone input digits only
       phoneInput.addEventListener('input', () => {
         phoneInput.value = phoneInput.value.replace(/\D/g, '');
-        if (/^\d{10}$/.test(phoneInput.value)) {
-          phoneError.classList.add('d-none');
-        }
+        if (/^\d{10}$/.test(phoneInput.value)) phoneError.classList.add('d-none');
       });
 
-      // Live validation for name
-      nameInput.addEventListener('input', () => {
-        if (nameInput.value.trim().length >= 4) {
-          nameError.classList.add('d-none');
-        }
-      });
+      // Live validation
+      nameInput.addEventListener('input', () => { if (nameInput.value.trim().length >= 4) nameError.classList.add('d-none'); });
+      commentsInput.addEventListener('input', () => { if (commentsInput.value.trim().length > 0) commentsError.classList.add('d-none'); });
 
-      // Live validation for comments
-      commentsInput.addEventListener('input', () => {
-        if (commentsInput.value.trim().length > 0) {
-          commentsError.classList.add('d-none');
-        }
-      });
+      // GPS Capture
+      getLocationBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        let valid = true;
+        if (nameInput.value.trim().length < 4) { nameError.classList.remove('d-none'); valid = false; }
+        if (!/^\d{10}$/.test(phoneInput.value)) { phoneError.classList.remove('d-none'); valid = false; }
+        if (commentsInput.value.trim().length === 0) { commentsError.classList.remove('d-none'); valid = false; }
+        if (!valid) { locationStatus.textContent = '⚠️ Please fill fields before capturing GPS.'; return; }
 
-      // GPS Capture with retry
-      getLocationBtn.addEventListener('click', () => {
-        if (!navigator.geolocation) {
-          locationStatus.textContent = 'Geolocation not supported!';
-          return;
-        }
+        if (!navigator.geolocation) { locationStatus.textContent = 'Geolocation not supported!'; return; }
+
         preloader.style.display = 'flex';
         locationStatus.textContent = 'Capturing GPS location...';
 
-        const capture = (attempt = 1) => {
-          navigator.geolocation.getCurrentPosition(
-            (pos) => {
-              const lat = pos.coords.latitude;
-              const lon = pos.coords.longitude;
-              const url = `https://www.google.com/maps?q=${lat},${lon}`;
-              locationLinkInput.value = url;
-              locationStatus.innerHTML = `<i class="fa fa-check text-success"></i> Location captured`;
-              getLocationBtn.classList.replace('btn-secondary', 'btn-success');
-              getLocationBtn.innerHTML = `<i class="fa fa-map-marker-alt"></i> Location Captured`;
-              preloader.style.display = 'none';
-            },
-            (err) => {
-              if (attempt < 2) {
-                locationStatus.textContent = 'Retrying location capture...';
-                capture(attempt + 1);
-              } else {
-                locationStatus.textContent = 'Error: ' + err.message;
-                getLocationBtn.classList.add('btn-danger');
-                preloader.style.display = 'none';
-              }
-            },
-            { enableHighAccuracy: true, timeout: 7000, maximumAge: 0 }
-          );
-        };
-
-        capture();
+        navigator.geolocation.getCurrentPosition(
+          (pos) => {
+            const lat = pos.coords.latitude;
+            const lon = pos.coords.longitude;
+            const url = `https://www.google.com/maps?q=${lat},${lon}`;
+            locationLinkInput.value = url;
+            locationStatus.innerHTML = `<i class="fa fa-check text-success"></i> Location captured`;
+            getLocationBtn.classList.replace('btn-secondary', 'btn-success');
+            getLocationBtn.innerHTML = `<i class="fa fa-map-marker-alt"></i> Location Captured`;
+            preloader.style.display = 'none';
+          },
+          (err) => {
+            locationStatus.textContent = 'Error capturing location: ' + err.message;
+            getLocationBtn.classList.add('btn-danger');
+            preloader.style.display = 'none';
+          },
+          { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+        );
       });
 
-      // Form Submit
+      // Form Submit (show modal first)
       form.addEventListener('submit', (e) => {
         e.preventDefault();
         let valid = true;
 
-        // Validate Name
-        if (nameInput.value.trim().length < 4) {
-          nameError.classList.remove('d-none');
-          valid = false;
-        }
-
-        // Validate Phone
-        if (!/^\d{10}$/.test(phoneInput.value)) {
-          phoneError.classList.remove('d-none');
-          valid = false;
-        }
-
-        // Validate Comments
-        if (commentsInput.value.trim().length === 0) {
-          commentsError.classList.remove('d-none');
-          valid = false;
-        }
-
-        // Validate GPS
-        if (!locationLinkInput.value) {
-          locationStatus.textContent = 'Please capture GPS location.';
-          valid = false;
-        }
+        if (nameInput.value.trim().length < 4) { nameError.classList.remove('d-none'); valid = false; }
+        if (!/^\d{10}$/.test(phoneInput.value)) { phoneError.classList.remove('d-none'); valid = false; }
+        if (commentsInput.value.trim().length === 0) { commentsError.classList.remove('d-none'); valid = false; }
+        if (!locationLinkInput.value) { locationStatus.textContent = 'Please capture GPS location.'; valid = false; }
 
         if (!valid) return;
 
@@ -397,17 +221,17 @@
           comments: commentsInput.value
         };
 
-        modal.show();
+        agreementModal.show();
       });
 
-      document.getElementById('denyBtn').addEventListener('click', () => {
-        modal.hide();
-        pendingData = null;
-      });
-
-      document.getElementById('acceptBtn').addEventListener('click', async () => {
-        modal.hide();
-        if (!pendingData) return;
+      // Confirm Submit
+      confirmSubmitBtn.addEventListener('click', async () => {
+        if (!agreeCheck.checked) {
+          agreeError.classList.remove('d-none');
+          return;
+        }
+        agreeError.classList.add('d-none');
+        agreementModal.hide();
 
         preloader.style.display = 'flex';
         try {
@@ -417,7 +241,6 @@
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(pendingData)
           });
-
           preloader.style.display = 'none';
           form.style.display = 'none';
           personalizedThankYou.textContent = `Thank You, ${pendingData.customerName}!`;
