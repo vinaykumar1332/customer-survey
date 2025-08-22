@@ -3,115 +3,204 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rice Customer Survey Form | Feedback & Trust</title>
+  <title>Customer Survey | Feedback</title>
 
-  <!-- Meta for SEO & Sharing -->
-  <meta name="description" content="Participate in our rice customer survey to share your feedback. Data is collected securely and used only for improving our services.">
-  <meta name="keywords" content="rice survey, customer feedback, food quality survey, secure survey form, customer satisfaction survey">
+  <!-- SEO -->
+  <meta name="description" content="Share your feedback in our secure customer survey. Your input helps us improve our services.">
+  <meta name="keywords" content="customer survey, feedback form, satisfaction survey, gps survey">
   <meta name="robots" content="index, follow">
-  <meta name="googlebot" content="index, follow">
-  <meta name="author" content="Your Company Name">
+  <meta name="author" content="Your Company">
 
-  <!-- Bootstrap CSS -->
+  <!-- Bootstrap & Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
   <style>
     body {
-      background: linear-gradient(135deg, #007bff 30%, #6610f2 100%);
+      background: linear-gradient(135deg, #6EE7B7 0%, #3B82F6 100%);
+      font-family: 'Poppins', sans-serif;
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 15px;
-      font-family: 'Poppins', sans-serif;
+      padding: 20px;
     }
     .form-container {
-      background: rgba(255, 255, 255, 0.95);
-      padding: 25px;
+      background: #fff;
+      padding: 30px;
       border-radius: 20px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.15);
       max-width: 450px;
       width: 100%;
       position: relative;
     }
-    .btn-custom { border-radius: 12px; font-weight: 600; padding: 12px; }
-    .btn-custom:hover { transform: scale(1.05); box-shadow: 0 5px 20px rgba(0,123,255,0.5); }
-    #locationStatus { font-size: 0.9em; margin-top: 5px; color: #555; }
-    .preloader {
-      display: none; position: absolute; inset: 0;
-      background: rgba(0, 0, 0, 0.7); align-items: center; justify-content: center;
-      z-index: 1000; border-radius: 20px;
+    h2 {
+      font-weight: 700;
+      text-align: center;
+      background: linear-gradient(to right, #3b82f6, #06b6d4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 25px;
     }
-    .loader { width: 50px; height: 50px; border: 5px solid rgba(255,255,255,0.3);
-      border-top: 5px solid #007bff; border-radius: 50%; animation: spin 1s linear infinite; }
-    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-    #thankYouMessage { display: none; text-align: center; }
-    #thankYouMessage h3 { color: #28a745; font-weight: 700; }
-    #thankYouMessage .btn-refresh { margin-top: 15px; }
-    textarea#comments { min-height: 120px; resize: vertical; }
+    label {
+      font-weight: 500;
+    }
+    input, textarea {
+      border-radius: 12px !important;
+      border: 1.5px solid #ddd !important;
+      transition: all 0.3s;
+    }
+    input:focus, textarea:focus {
+      border-color: #3b82f6 !important;
+      box-shadow: 0 0 6px rgba(59,130,246,0.3) !important;
+    }
+    .btn-custom {
+      border-radius: 14px;
+      font-weight: 600;
+      padding: 10px 14px;
+      transition: 0.25s;
+    }
+    .btn-custom:hover {
+      transform: scale(1.04);
+      box-shadow: 0 4px 16px rgba(59,130,246,0.35);
+    }
+    .gps-btn {
+      display: block;
+      margin: 0 auto;
+      width: 70%;
+      padding: 8px;
+      font-size: 0.9rem;
+      border-radius: 12px;
+    }
+    #locationStatus {
+      font-size: 0.85rem;
+      margin-top: 6px;
+      text-align: center;
+      color: #666;
+    }
+    /* Preloader */
+    .preloader {
+      display: none;
+      position: absolute;
+      inset: 0;
+      background: rgba(255,255,255,0.9);
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      z-index: 1000;
+      border-radius: 20px;
+    }
+    .loader {
+      border: 4px solid rgba(0,0,0,0.1);
+      border-top: 4px solid #3b82f6;
+      border-radius: 50%;
+      width: 45px;
+      height: 45px;
+      animation: spin 1s linear infinite;
+      margin-bottom: 10px;
+    }
+    .preloader-text {
+      font-weight: 600;
+      color: #3b82f6;
+    }
+    @keyframes spin { 100% { transform: rotate(360deg); } }
+
+    /* Thank You Screen */
+    #thankYouMessage {
+      display: none;
+      text-align: center;
+      position: relative;
+    }
+    #thankYouMessage h3 {
+      font-weight: 700;
+      margin-top: 15px;
+      color: #16a34a;
+    }
+    #thankYouMessage .big-emoji {
+      font-size: 3.5rem;
+      animation: pop 0.6s ease;
+    }
+    @keyframes pop {
+      0% { transform: scale(0.5); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    canvas#confetti {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 5;
+    }
+    #comments{
+      min-height: 160px;
+    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="form-container">
-      <!-- Preloader -->
-      <div class="preloader" id="preloader"><div class="loader"></div></div>
+  <div class="form-container">
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+      <div class="loader"></div>
+      <div class="preloader-text">Please wait...</div>
+    </div>
 
-      <h2 class="text-center mb-4 text-primary">Customer Survey Form</h2>
+    <h2>Customer Survey</h2>
 
-      <form id="surveyForm" novalidate>
-        <!-- Name -->
-        <div class="mb-3">
-          <label for="customerName">Customer Name</label>
-          <input type="text" class="form-control" id="customerName" required minlength="4" placeholder="Enter your name">
-          <small class="text-danger d-none" id="nameError">Name must be at least 4 characters.</small>
-        </div>
-
-        <!-- Phone -->
-        <div class="mb-3">
-          <label for="phoneNumber">Phone Number</label>
-          <input type="text" class="form-control" id="phoneNumber" required maxlength="10" inputmode="numeric" placeholder="Enter 10-digit phone number">
-          <small class="text-danger d-none" id="phoneError">Please enter a valid 10-digit number.</small>
-        </div>
-
-        <!-- GPS -->
-        <div class="mb-3">
-          <label>GPS Location</label>
-          <button type="button" class="btn btn-secondary w-100 btn-custom" id="getLocation">
-            <i class="fa fa-location-crosshairs"></i> Capture GPS Location
-          </button>
-          <div id="locationStatus">Click the button to capture location</div>
-          <input type="hidden" id="locationLink" required>
-        </div>
-
-        <!-- Comments -->
-        <div class="mb-3">
-          <label for="comments">Comments</label>
-          <textarea class="form-control" id="comments" rows="4" required placeholder="Your feedback on rice usage"></textarea>
-          <small class="text-danger d-none" id="commentsError">Please provide your feedback.</small>
-        </div>
-
-        <!-- Submit -->
-        <button type="submit" class="btn btn-primary w-100 btn-custom">
-          <i class="fa fa-paper-plane"></i> Submit
-        </button>
-      </form>
-
-      <!-- Thank You -->
-      <div id="thankYouMessage" class="mt-4">
-        <div class="smile">😊</div>
-        <h3 id="personalizedThankYou">Thank You!</h3>
-        <p>Your survey has been submitted successfully.</p>
-        <button class="btn btn-success btn-refresh" onclick="window.location.reload();">
-          <i class="fa fa-rotate-right"></i> Fill Again
-        </button>
+    <!-- Survey Form -->
+    <form id="surveyForm" novalidate>
+      <!-- Name -->
+      <div class="mb-3">
+        <label for="customerName">Your Name</label>
+        <input type="text" class="form-control" id="customerName" required minlength="4" placeholder="Enter your name">
+        <small class="text-danger d-none" id="nameError">Name must be at least 4 characters.</small>
       </div>
+
+      <!-- Phone -->
+      <div class="mb-3">
+        <label for="phoneNumber">Phone Number</label>
+        <input type="text" class="form-control" id="phoneNumber" required maxlength="10" inputmode="numeric" placeholder="10-digit mobile number">
+        <small class="text-danger d-none" id="phoneError">Please enter a valid 10-digit number.</small>
+      </div>
+
+      <!-- GPS -->
+      <div class="mb-3">
+        <label>GPS Location</label>
+        <button type="button" class="btn btn-outline-primary gps-btn" id="getLocation">
+          <i class="fa fa-location-crosshairs"></i> Capture Location
+        </button>
+        <div id="locationStatus">Tap to capture your GPS</div>
+        <input type="hidden" id="locationLink" required>
+      </div>
+
+      <!-- Comments -->
+      <div class="mb-3">
+        <label for="comments">Your Feedback</label>
+        <textarea class="form-control" id="comments" required placeholder="Share your thoughts"></textarea>
+        <small class="text-danger d-none" id="commentsError">Please provide your feedback.</small>
+      </div>
+
+      <!-- Submit -->
+      <button type="submit" class="btn btn-primary w-100 btn-custom">
+        <i class="fa fa-paper-plane"></i> Submit Feedback
+      </button>
+    </form>
+
+    <!-- Thank You -->
+    <div id="thankYouMessage" class="mt-4">
+      <canvas id="confetti"></canvas>
+      <div class="big-emoji">🎉</div>
+      <h3 id="personalizedThankYou">Thank You!</h3>
+      <p>Your feedback has been submitted successfully.</p>
+      <button class="btn btn-success btn-refresh" onclick="window.location.reload();">
+        <span style="font-size:1.2rem;">🔄</span> Submit Again
+      </button>
     </div>
   </div>
 
   <!-- Agreement Modal -->
-  <div class="modal fade" id="agreementModal" tabindex="-1" aria-hidden="true">
+  <div class="modal fade" id="agreementModal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content rounded-4">
         <div class="modal-header">
@@ -119,7 +208,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body">
-          <p>By submitting this form, you agree that your data (name, phone, location & feedback) will be collected securely and used only for improving our services.</p>
+          <p>By submitting, you agree that your data (name, phone, GPS & feedback) will be collected securely and used only to improve services.</p>
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="agreeCheck">
             <label class="form-check-label" for="agreeCheck"> I agree to the terms & privacy policy.</label>
@@ -127,7 +216,7 @@
           <small class="text-danger d-none" id="agreeError">You must agree before submitting.</small>
         </div>
         <div class="modal-footer">
-          <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
           <button class="btn btn-primary" id="confirmSubmit"><i class="fa fa-check"></i> Confirm & Submit</button>
         </div>
       </div>
@@ -136,6 +225,8 @@
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Functionality -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const form = document.getElementById('surveyForm');
@@ -155,62 +246,84 @@
       const confirmSubmitBtn = document.getElementById('confirmSubmit');
       const agreeCheck = document.getElementById('agreeCheck');
       const agreeError = document.getElementById('agreeError');
+      const confettiCanvas = document.getElementById("confetti");
+      const ctx = confettiCanvas.getContext("2d");
       let pendingData = null;
 
-      // Force phone input digits only
+      // Resize confetti canvas
+      function resizeCanvas() {
+        confettiCanvas.width = thankYouMessage.offsetWidth;
+        confettiCanvas.height = thankYouMessage.offsetHeight;
+      }
+      window.addEventListener("resize", resizeCanvas);
+
+      // Simple confetti
+      function launchConfetti() {
+        resizeCanvas();
+        const pieces = Array.from({length: 100}, () => ({
+          x: Math.random() * confettiCanvas.width,
+          y: Math.random() * confettiCanvas.height - confettiCanvas.height,
+          size: Math.random() * 6 + 4,
+          color: `hsl(${Math.random()*360},100%,50%)`,
+          speed: Math.random() * 3 + 2
+        }));
+
+        function draw() {
+          ctx.clearRect(0,0,confettiCanvas.width,confettiCanvas.height);
+          pieces.forEach(p => {
+            ctx.fillStyle = p.color;
+            ctx.fillRect(p.x,p.y,p.size,p.size);
+            p.y += p.speed;
+            if (p.y > confettiCanvas.height) p.y = -10;
+          });
+          requestAnimationFrame(draw);
+        }
+        draw();
+      }
+
+      // Phone digits only
       phoneInput.addEventListener('input', () => {
         phoneInput.value = phoneInput.value.replace(/\D/g, '');
         if (/^\d{10}$/.test(phoneInput.value)) phoneError.classList.add('d-none');
       });
 
-      // Live validation
       nameInput.addEventListener('input', () => { if (nameInput.value.trim().length >= 4) nameError.classList.add('d-none'); });
       commentsInput.addEventListener('input', () => { if (commentsInput.value.trim().length > 0) commentsError.classList.add('d-none'); });
 
-      // GPS Capture
+      // GPS
       getLocationBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        let valid = true;
-        if (nameInput.value.trim().length < 4) { nameError.classList.remove('d-none'); valid = false; }
-        if (!/^\d{10}$/.test(phoneInput.value)) { phoneError.classList.remove('d-none'); valid = false; }
-        if (commentsInput.value.trim().length === 0) { commentsError.classList.remove('d-none'); valid = false; }
-        if (!valid) { locationStatus.textContent = '⚠️ Please fill fields before capturing GPS.'; return; }
-
         if (!navigator.geolocation) { locationStatus.textContent = 'Geolocation not supported!'; return; }
 
         preloader.style.display = 'flex';
-        locationStatus.textContent = 'Capturing GPS location...';
+        locationStatus.textContent = 'Capturing GPS...';
 
         navigator.geolocation.getCurrentPosition(
           (pos) => {
             const lat = pos.coords.latitude;
             const lon = pos.coords.longitude;
-            const url = `https://www.google.com/maps?q=${lat},${lon}`;
-            locationLinkInput.value = url;
+            locationLinkInput.value = `https://www.google.com/maps?q=${lat},${lon}`;
             locationStatus.innerHTML = `<i class="fa fa-check text-success"></i> Location captured`;
-            getLocationBtn.classList.replace('btn-secondary', 'btn-success');
-            getLocationBtn.innerHTML = `<i class="fa fa-map-marker-alt"></i> Location Captured`;
+            getLocationBtn.classList.replace('btn-outline-primary','btn-success');
+            getLocationBtn.innerHTML = `<i class="fa fa-map-marker-alt"></i> Captured`;
             preloader.style.display = 'none';
           },
           (err) => {
-            locationStatus.textContent = 'Error capturing location: ' + err.message;
+            locationStatus.textContent = 'Error: ' + err.message;
             getLocationBtn.classList.add('btn-danger');
             preloader.style.display = 'none';
-          },
-          { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+          }
         );
       });
 
-      // Form Submit (show modal first)
+      // Submit
       form.addEventListener('submit', (e) => {
         e.preventDefault();
         let valid = true;
-
         if (nameInput.value.trim().length < 4) { nameError.classList.remove('d-none'); valid = false; }
         if (!/^\d{10}$/.test(phoneInput.value)) { phoneError.classList.remove('d-none'); valid = false; }
         if (commentsInput.value.trim().length === 0) { commentsError.classList.remove('d-none'); valid = false; }
         if (!locationLinkInput.value) { locationStatus.textContent = 'Please capture GPS location.'; valid = false; }
-
         if (!valid) return;
 
         pendingData = {
@@ -220,24 +333,19 @@
           locationLink: locationLinkInput.value,
           comments: commentsInput.value
         };
-
         agreementModal.show();
       });
 
       // Confirm Submit
       confirmSubmitBtn.addEventListener('click', async () => {
-        if (!agreeCheck.checked) {
-          agreeError.classList.remove('d-none');
-          return;
-        }
+        if (!agreeCheck.checked) { agreeError.classList.remove('d-none'); return; }
         agreeError.classList.add('d-none');
         agreementModal.hide();
 
         preloader.style.display = 'flex';
         try {
           await fetch('https://script.google.com/macros/s/AKfycbx2wjv5bNBy-bROGKZKofm5w9eCvWc1rmUWsq3-3CDALFc0ZWuemfSfkJChlFMyN5ujTQ/exec', {
-            method: 'POST',
-            mode: 'no-cors',
+            method: 'POST', mode: 'no-cors',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(pendingData)
           });
@@ -245,6 +353,7 @@
           form.style.display = 'none';
           personalizedThankYou.textContent = `Thank You, ${pendingData.customerName}!`;
           thankYouMessage.style.display = 'block';
+          launchConfetti();
         } catch (err) {
           preloader.style.display = 'none';
           alert('Error submitting form: ' + err.message);
